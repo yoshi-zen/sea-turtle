@@ -1,1 +1,1 @@
-drop database if exists problems;
+drop table if exists problems;
