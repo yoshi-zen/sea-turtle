@@ -1,7 +1,11 @@
 .header {
   width: 100%;
   box-shadow: 0 10.1px 6.4px rgba(0, 0, 0, 0.086), 0 10.2px 10.8px rgba(0, 0, 0, 0.092);
+  position: fixed;
+  top: 0;
+  left: 0;
 }
+
 .flexContainer {
   composes: spaceBetween from '@/styles/style-utils.module.css';
 }

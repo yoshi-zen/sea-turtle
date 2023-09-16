@@ -13,7 +13,7 @@ export default function Header() {
           <ul className={styles.header_menu}>
             <li>ホーム</li>
             <li>問題一覧</li>
-            <li>マイページ</li>
+            <li>log in</li>
           </ul>
         </div>
       </Container>
