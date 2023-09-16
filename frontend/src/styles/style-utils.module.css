@@ -1,0 +1,29 @@
+.spaceBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sideBySide {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  .sideBySide {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.sideBySideCenter {
+  composes: sideBySide;
+  align-items: center;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .sideBySideCenter {
+    text-align: left;
+  }
+}
