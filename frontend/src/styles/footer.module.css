@@ -1,3 +1,42 @@
 .footer {
+  background-color: var(--color-gray-100);
+  color: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.flexContainer {
+  composes: spaceBetween from '@/styles/style-utils.module.css';
+  padding: 1em 0;
+}
+
+.site_icon {
+  width: 7em;
+  height: 7em;
+  background-color: white;
+}
+
+.footer_menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer_menu > * {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  padding-bottom: 0.3em;
+}
+
+.footer_menu > *::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 110%;
+  left: -5%;
+  height: 1px;
   background-color: white;
 }
