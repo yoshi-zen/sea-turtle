@@ -9,7 +9,8 @@ import (
 )
 
 const (
-	ProblemNumPerPage = 20
+	// テストするときは、ここも変更する必要がある
+	ProblemNumPerPage = 2
 )
 
 // 1ページ何個取得するかを決めないといけない
@@ -41,7 +42,7 @@ func SelectProblemList(db *sql.DB, page int) ([]models.Problem, error) {
 	return problemList, nil
 }
 
-func SelectProblemDetail(db *sql.DB, ID int) (*models.Problem, error) {
+func SelectProblemDetail(db *sql.DB, ID int) (models.Problem, error) {
 	const sqlStr = `
 	select id, title, problem_statement, answer
 	from problems
@@ -52,18 +53,18 @@ func SelectProblemDetail(db *sql.DB, ID int) (*models.Problem, error) {
 
 	row := db.QueryRow(sqlStr, ID)
 	if err := row.Err(); err != nil {
-		return nil, err
+		return models.Problem{}, err
 	}
 
 	err := row.Scan(&problem.ID, &problem.Title, &problem.ProblemStatement, &problem.Answer)
 	if err != nil {
-		return nil, err
+		return models.Problem{}, err
 	}
 
 	return problem, nil
 }
 
-func InsertProblem(db *sql.DB, problem models.Problem) (*models.Problem, error) {
+func InsertProblem(db *sql.DB, problem models.Problem) (models.Problem, error) {
 	const sqlStr = `
 	insert into problems (title, problem_statement, answer, created_at) values
 	(?, ?, ?, now());
@@ -74,7 +75,7 @@ func InsertProblem(db *sql.DB, problem models.Problem) (*models.Problem, error) 
 
 	result, err := db.Exec(sqlStr, problem.Title, problem.ProblemStatement, problem.Answer)
 	if err != nil {
-		return nil, err
+		return models.Problem{}, err
 	}
 
 	id, _ := result.LastInsertId()
