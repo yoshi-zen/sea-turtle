@@ -1,0 +1,9 @@
+.grid12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+
+/* .grid12 > * {
+  grid-column: 1 / -1;
+} */

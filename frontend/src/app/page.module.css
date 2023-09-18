@@ -1,0 +1,23 @@
+/* .g100,
+.g75,
+.g50,
+.g25 {
+  width: 100px;
+  height: 100px;
+}
+
+.g100 {
+  background-color: var(--color-gray-100);
+}
+
+.g75 {
+  background-color: var(--color-gray-75);
+}
+
+.g50 {
+  background-color: var(--color-gray-50);
+}
+
+.g25 {
+  background-color: var(--color-gray-25);
+} */

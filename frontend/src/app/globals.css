@@ -75,7 +75,15 @@
 */
 
 :root {
+  /* 色系のとりきめ */
   --color-gray-100: #8d8d8d;
+  --color-gray-75: #9f9f9f;
+  --color-gray-50: #c4c4c4;
+  --color-gray-25: #e2e2e2;
+
+  /* 共通レイアウト的な */
+  --header-height: 45px;
+  --footer-height: 50px;
 }
 
 * {
@@ -98,8 +106,15 @@ html.wf-active {
 }
 
 body {
-  padding-top: 50px;
+  /* padding-top: 50px; */
   /* ヘッダーの重なりよけです */
+  /* margin-top: clamp(1.563rem, 1.398rem + 0.53vw, 2.188rem); */
+  margin-top: var(--header-height);
+}
+
+h1 {
+  /* vw 500-2400で計算 */
+  font-size: clamp(1.563rem, 1.398rem + 0.53vw, 2.188rem); /* 25-35px */
 }
 
 /*
