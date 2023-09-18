@@ -1,0 +1,23 @@
+.left_container {
+  background-color: var(--color-gray-25);
+  grid-column: 1 / span 3;
+  height: 100vh;
+  padding: 0.5em 0 0 0.5em;
+}
+
+.left_container > * + * {
+  margin-top: 0.5em;
+}
+
+.q1 {
+  background-color: white;
+  padding: 0.2em 0.5em;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.q2,
+.q3,
+.q4 {
+  padding: 0.2em 0.5em;
+}
