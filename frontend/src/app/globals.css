@@ -81,6 +81,8 @@
   --color-gray-50: #c4c4c4;
   --color-gray-25: #e2e2e2;
 
+  --color-brown: #ffe6cd;
+
   /* 共通レイアウト的な */
   --header-height: 45px;
   --footer-height: 50px;

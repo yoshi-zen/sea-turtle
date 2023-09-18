@@ -1,11 +1,11 @@
 .default {
-  width: 93%;
-  max-width: 1192px;
+  width: 95%;
+  max-width: 1500px;
   margin: 0 auto;
   height: 100%;
 }
 
 .large {
   composes: default;
-  max-width: 1280px;
+  max-width: 1920px;
 }
