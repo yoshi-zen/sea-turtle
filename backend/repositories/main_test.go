@@ -13,11 +13,11 @@ import (
 var db *sql.DB
 
 var (
-	dbUser     = "root"            //os.Getenv("DB_USER")
-	dbPassword = "jfJe749Khgp9elk" //os.Getenv("DB_PASSWORD")
-	dbHost     = "127.0.0.1"       //os.Getenv("DB_HOST")
-	dbPort     = "3306"            //os.Getenv("DB_PORT")
-	dbDatabase = "umigame-db"      //os.Getenv("DB_DATABASE")
+	dbUser     = os.Getenv("DB_USER")
+	dbPassword = os.Getenv("DB_PASSWORD")
+	dbHost     = os.Getenv("DB_HOST")
+	dbPort     = os.Getenv("DB_PORT")
+	dbDatabase = os.Getenv("DB_DATABASE")
 	dbConfig   = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", dbUser, dbPassword, dbHost, dbPort, dbDatabase)
 )
 
