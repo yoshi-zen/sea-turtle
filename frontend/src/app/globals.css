@@ -84,7 +84,7 @@
   --color-brown: #ffe6cd;
 
   /* 文字サイズ的なとりきめ */
-  --char-size-hero: clamp(2.188rem, 1.398rem + 0.53vw, 3.125rem); /* 35-50px */
+  --char-size-hero: clamp(2.5rem, 2.171rem + 1.05vw, 3.75rem); /* 40-60px */
   --char-size-h1: clamp(1.563rem, 1.398rem + 0.53vw, 2.188rem); /* 25-35px */
 
   /* 共通レイアウト的な */

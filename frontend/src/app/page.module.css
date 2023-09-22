@@ -21,3 +21,32 @@
 .g25 {
   background-color: var(--color-gray-25);
 } */
+
+.hero_container {
+  composes: spaceBetween from '@/styles/style-utils.module.css';
+  height: calc(100vh - var(--header-height) - var(--footer-height));
+  /* width: 100%;
+  top: var(--header-height);
+  left: 0; */
+}
+
+.hero_container::before {
+  height: calc(100vh - var(--header-height) - var(--footer-height));
+  width: 100%;
+  position: absolute;
+  top: var(--header-height);
+  left: 0;
+  content: '';
+  background-color: black;
+  z-index: -1;
+}
+
+.heroText_wrapper h1 {
+  font-size: var(--char-size-hero);
+  color: white;
+}
+
+.heroImg_wrapper {
+  /* z-index: 5000;
+  background-image: linear-gradient(90deg, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0) 20%, rgba(71, 18, 109, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(0, 0, 0, 1)); */
+}
