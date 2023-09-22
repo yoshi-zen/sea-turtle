@@ -1,83 +1,56 @@
+'use client';
+
 import styles from '@/app/questions/page.module.css';
 import Layout12 from '@/components/layout-12columns';
 
+import { useState } from 'react';
+
+const qTitle = [
+  'ウミガメのスープ',
+  'クレイジータクシー',
+  'ひどいスッピン',
+  'ゴンとチロ',
+  '過激なダイエット',
+  '爆弾が仕掛けられた車',
+  'ある偉人の版画',
+  '値段より大切なもの',
+  '包帯を巻いたプログラマー',
+  '刈り取り',
+  '知る人ぞ知るラーメン',
+  '男の覚悟',
+  '道を教えてください',
+  '振られましたね？',
+  '真逆の主人公',
+  'プリクラ開発秘話',
+  'カメラマンの願い',
+  '臓器提供',
+  '素敵なステーキ',
+  'うんこを見ろ',
+  '親を食った男',
+  '箱の中',
+  'テレビ壊しちゃった',
+  'パーカーを着なさい',
+];
+
 export default function Questions() {
+  const [selected, setSelected] = useState(null);
+
+  const handleClick = (index) => {
+    setSelected(index);
+  };
+
   return (
     <Layout12>
       <div className={styles.left_container}>
         <h1 className={styles.pageTitle}>問題一覧</h1>
-        <div className={styles.q1}>
-          <p>1. ウミガメのスープ</p>
-        </div>
-        <div className={styles.q2}>
-          <p>2. クレイジータクシー</p>
-        </div>
-        <div className={styles.q3}>
-          <p>3. ひどいスッピン</p>
-        </div>
-        <div className={styles.q4}>
-          <p>4. ゴンとチロ</p>
-        </div>
-        <div className={styles.q4}>
-          <p>5. 過激なダイエット</p>
-        </div>
-        <div className={styles.q4}>
-          <p>6. 爆弾が仕掛けられた車</p>
-        </div>
-        <div className={styles.q4}>
-          <p>7. ある偉人の版画</p>
-        </div>
-        <div className={styles.q4}>
-          <p>8. 値段より大切なもの</p>
-        </div>
-        <div className={styles.q4}>
-          <p>9. 包帯を巻いたプログラマー</p>
-        </div>
-        <div className={styles.q4}>
-          <p>10. 刈り取り</p>
-        </div>
-        <div className={styles.q4}>
-          <p>11. 知る人ぞ知るラーメン</p>
-        </div>
-        <div className={styles.q4}>
-          <p>12. 男の覚悟</p>
-        </div>
-        <div className={styles.q4}>
-          <p>13. 道を教えてください</p>
-        </div>
-        <div className={styles.q4}>
-          <p>14. 振られましたね？</p>
-        </div>
-        <div className={styles.q4}>
-          <p>15. 真逆の主人公</p>
-        </div>
-        <div className={styles.q4}>
-          <p>16. プリクラ開発秘話</p>
-        </div>
-        <div className={styles.q4}>
-          <p>17. カメラマンの願い</p>
-        </div>
-        <div className={styles.q4}>
-          <p>18. 臓器提供</p>
-        </div>
-        <div className={styles.q4}>
-          <p>19. 素敵なステーキ</p>
-        </div>
-        <div className={styles.q4}>
-          <p>20. うんこを見ろ</p>
-        </div>
-        <div className={styles.q4}>
-          <p>21. 親を食った男</p>
-        </div>
-        <div className={styles.q4}>
-          <p>22. 箱の中</p>
-        </div>
-        <div className={styles.q4}>
-          <p>23. テレビ壊しちゃった</p>
-        </div>
-        <div className={styles.q4}>
-          <p>24. パーカーを着なさい</p>
-        </div>
+        {qTitle.map((title, index) => (
+          <div key={index} className={selected === index ? styles.title_selected_inner : styles.title_inner} onClick={() => handleClick(index)}>
+            <div className={styles.flex_inner}>
+              <p style={{ width: '2em', textAlign: 'end' }}>{index + 1}.</p>
+              <p>{title}</p>
+            </div>
+          </div>
+        ))}
       </div>
       <div className={styles.center_container}>
         <div className={styles.flex_wrapper}>

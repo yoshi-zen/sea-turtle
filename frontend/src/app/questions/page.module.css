@@ -1,5 +1,5 @@
 .left_container {
-  background-color: var(--color-gray-25);
+  background-color: var(--color-gray-100);
   grid-column: 1 / span 3;
   height: calc(100vh - var(--header-height) - var(--footer-height));
   padding: 2em 0 2em 0.5em;
@@ -12,24 +12,33 @@
 }
 
 .left_container > * + * {
-  margin-top: 0.5em;
+  margin-top: 0.2em;
 }
 
 .pageTitle {
   padding-bottom: 0.5em;
+  color: white;
+  font-weight: 700;
 }
 
-.q1 {
+.title_selected_inner {
   background-color: white;
-  padding: 0.2em 0.5em;
+  padding: 0.5em 0.5em;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  cursor: pointer;
 }
 
-.q2,
-.q3,
-.q4 {
-  padding: 0.2em 0.5em;
+.title_inner {
+  padding: 0.5em 0.5em;
+  color: white;
+  cursor: pointer;
+}
+
+.flex_inner {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
 }
 
 .center_container {
@@ -46,6 +55,6 @@
   background-color: var(--color-brown);
   border: 5px double var(--color-gray-75);
   padding: 0.5em;
-  margin-top: 1em;
+  margin-top: 2em;
   position: relative;
 }
