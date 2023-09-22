@@ -46,7 +46,7 @@ export default function Questions() {
         {qTitle.map((title, index) => (
           <div key={index} className={selected === index ? styles.title_selected_inner : styles.title_inner} onClick={() => handleClick(index)}>
             <div className={styles.flex_inner}>
-              <p style={{ width: '2em', textAlign: 'end' }}>{index + 1}.</p>
+              <p style={{ width: '1.5em', textAlign: 'end' }}>{index + 1}.</p>
               <p>{title}</p>
             </div>
           </div>
@@ -65,6 +65,22 @@ export default function Questions() {
             <p>ここにチャット</p>
           </div>
         </div>
+      </div>
+      <div className={styles.right_container}>
+        <div className={styles.contributer_wrapper}>
+          <p>Contributer</p>
+          <div className={styles.contributer_name_pic_inner}>
+            <div style={{ width: '50px', height: '50px', borderRadius: '25px', backgroundColor: 'gray' }}></div>
+            <div className={styles.contributer_name_button_inner}>
+              <p style={{ fontWeight: '700', letterSpacing: 'normal' }}>Yoshi_zen</p>
+              <button>Follow</button>
+            </div>
+          </div>
+        </div>
+        {/* <div className={styles.new_question_wrapper}>
+          <h2>新着問題</h2>
+          <p>ゴンとチロ</p>
+        </div> */}
       </div>
     </Layout12>
   );
