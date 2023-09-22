@@ -1,12 +1,22 @@
 .left_container {
   background-color: var(--color-gray-25);
   grid-column: 1 / span 3;
-  height: 100vh;
-  padding: 0.5em 0 0 0.5em;
+  height: calc(100vh - var(--header-height) - var(--footer-height));
+  padding: 2em 0 2em 0.5em;
+  overflow-y: auto;
+}
+
+.left_container::-webkit-scrollbar {
+  /*スクロールバーいらん*/
+  display: none;
 }
 
 .left_container > * + * {
   margin-top: 0.5em;
+}
+
+.pageTitle {
+  padding-bottom: 0.5em;
 }
 
 .q1 {
@@ -20,4 +30,22 @@
 .q3,
 .q4 {
   padding: 0.2em 0.5em;
+}
+
+.center_container {
+  grid-column: 4 / span 6;
+}
+
+.flex_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.question_inner {
+  background-color: var(--color-brown);
+  border: 5px double var(--color-gray-75);
+  padding: 0.5em;
+  margin-top: 1em;
+  position: relative;
 }

@@ -81,6 +81,12 @@
   --color-gray-50: #c4c4c4;
   --color-gray-25: #e2e2e2;
 
+  --color-brown: #ffe6cd;
+
+  /* 文字サイズ的なとりきめ */
+  --char-size-hero: clamp(2.5rem, 2.171rem + 1.05vw, 3.75rem); /* 40-60px */
+  --char-size-h1: clamp(1.563rem, 1.398rem + 0.53vw, 2.188rem); /* 25-35px */
+
   /* 共通レイアウト的な */
   --header-height: 45px;
   --footer-height: 50px;
@@ -94,7 +100,7 @@
   font-family: 'kaisei-harunoumi', sans-serif;
   font-weight: 400;
   font-style: normal;
-  letter-spacing: -0.1em;
+  /* letter-spacing: -0.05em; */
 }
 
 html {
@@ -110,11 +116,12 @@ body {
   /* ヘッダーの重なりよけです */
   /* margin-top: clamp(1.563rem, 1.398rem + 0.53vw, 2.188rem); */
   margin-top: var(--header-height);
+  margin-bottom: var(--footer-height);
 }
 
 h1 {
   /* vw 500-2400で計算 */
-  font-size: clamp(1.563rem, 1.398rem + 0.53vw, 2.188rem); /* 25-35px */
+  font-size: var(--char-size-h1); /* 25-35px */
 }
 
 /*
