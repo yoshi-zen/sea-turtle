@@ -19,6 +19,7 @@
   flex-direction: row;
   align-items: center;
   gap: 2em;
+  cursor: pointer;
 }
 
 .header_menu {
@@ -26,6 +27,7 @@
   flex-direction: row;
   align-items: center;
   gap: 2em;
+  cursor: pointer;
 }
 
 @media (max-width: 767px) {
