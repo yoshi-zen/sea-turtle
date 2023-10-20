@@ -84,12 +84,15 @@
   --color-brown: #ffe6cd;
 
   /* 文字サイズ的なとりきめ */
-  --char-size-hero: clamp(2.5rem, 2.171rem + 1.05vw, 3.75rem); /* 40-60px */
-  --char-size-h1: clamp(1.563rem, 1.398rem + 0.53vw, 2.188rem); /* 25-35px */
+  --char-size-hero: clamp(1.5rem, 0.773rem + 3.64vw, 3.5rem); /* 40-60px */
+  --char-size-h1: clamp(1.2rem, 0.727rem + 2.36vw, 2.5rem); /* 25-35px */
+  --char-size-h2: clamp(1rem, 0.636rem + 1.82vw, 2rem);
+
+  --char-size-body: clamp(0.7rem, 0.591rem + 0.55vw, 1rem);
 
   /* 共通レイアウト的な */
-  --header-height: 45px;
-  --footer-height: 50px;
+  --header-height: calc(var(--char-size-h2) + 1rem);
+  --footer-height: calc(var(--char-size-h1) + 1rem);
 }
 
 * {
@@ -114,6 +117,15 @@ body {
 h1 {
   /* vw 500-2400で計算 */
   font-size: var(--char-size-h1); /* 25-35px */
+}
+
+h2 {
+  font-size: var(--char-size-h2);
+}
+
+p,
+li {
+  font-size: var(--char-size-body);
 }
 
 /*
