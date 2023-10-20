@@ -1,12 +1,8 @@
-'use client';
-
 import './globals.css';
-import { Inter } from 'next/font/google';
-import adobeFonts from '@/api/adobe-fonts';
-import { useEffect } from 'react';
+import { Shippori_Mincho } from 'next/font/google';
 import Layout from '@/components/layout';
 
-const inter = Inter({ subsets: ['latin'] });
+const shippori = Shippori_Mincho({ subsets: ['latin'], weight: '500' });
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,13 +10,9 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  useEffect(() => {
-    if (process.browser) adobeFonts(document);
-  }, []);
-
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className={shippori.className}>
         <Layout>{children}</Layout>
       </body>
     </html>
