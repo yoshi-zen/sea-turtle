@@ -7,19 +7,34 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/yoshi-zen/sea-turtle/backend/routers"
 )
 
-var db *sql.DB
-
 var (
-	dbUser     = os.Getenv("DB_USER")
-	dbPassword = os.Getenv("DB_PASSWORD")
-	dbHost     = os.Getenv("DB_HOST")
-	dbPort     = os.Getenv("DB_PORT")
-	dbDatabase = os.Getenv("DB_DATABASE")
-	dbConfig   = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", dbUser, dbPassword, dbHost, dbPort, dbDatabase)
+	db         *sql.DB
+	dbUser     string
+	dbPassword string
+	dbHost     string
+	dbPort     string
+	dbDatabase string
+	dbConfig   string
 )
+
+func init() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+
+	dbUser = os.Getenv("DB_USER")
+	dbPassword = os.Getenv("DB_PASSWORD")
+	dbHost = os.Getenv("DB_HOST")
+	dbPort = os.Getenv("DB_PORT")
+	dbDatabase = os.Getenv("DB_DATABASE")
+	dbConfig = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", dbUser, dbPassword, dbHost, dbPort, dbDatabase)
+}
 
 func connectDB() (*sql.DB, error) {
 	var err error
@@ -39,6 +54,8 @@ func main() {
 	}
 
 	r := routers.NewRouter(db)
+
+	fmt.Println(dbConfig)
 
 	log.Println("server start at port 8080")
 	log.Fatal(http.ListenAndServe(":8080", r))

@@ -31,7 +31,7 @@ func (c *ProblemController) GetProblemListHandler(w http.ResponseWriter, req *ht
 			return
 		}
 	} else {
-		fmt.Println("invalid request")
+		fmt.Println("set valid query")
 		return
 	}
 
@@ -69,6 +69,8 @@ func (c *ProblemController) GetProblemDetailHandler(w http.ResponseWriter, req *
 func (c *ProblemController) PostProblemHandler(w http.ResponseWriter, req *http.Request) {
 	var problem models.Problem
 	json.NewDecoder(req.Body).Decode(&problem)
+
+	fmt.Println(problem)
 
 	newProblem, err := services.PostProblemService(c.db, problem)
 	if err != nil {
