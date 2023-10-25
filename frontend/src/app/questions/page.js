@@ -12,9 +12,9 @@ const qTitle = [
   { title: 'ゴンとチロ', content: 'おはよう' },
   { title: '過激なダイエット', content: 'おやすみ' },
   { title: '爆弾が仕掛けられた車', content: 'hogehoge' },
-  { title: 'ある偉人の版画' },
-  { title: '値段より大切なもの' },
-  { title: '包帯を巻いたプログラマー' },
+  { title: 'ある偉人の版画', content: 'hogehoge' },
+  { title: '値段より大切なもの', content: 'hogehoge' },
+  { title: '包帯を巻いたプログラマー', content: 'hogehoge' },
 
   // 'ウミガメのスープ',
   // 'クレイジータクシー',
