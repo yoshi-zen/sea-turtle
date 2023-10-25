@@ -15,6 +15,8 @@ const qTitle = [
   { title: 'ある偉人の版画', content: 'hogehoge' },
   { title: '値段より大切なもの', content: 'hogehoge' },
   { title: '包帯を巻いたプログラマー', content: 'hogehoge' },
+  { title: '刈り取り', content: 'hogehoge' },
+  
 
   // 'ウミガメのスープ',
   // 'クレイジータクシー',
