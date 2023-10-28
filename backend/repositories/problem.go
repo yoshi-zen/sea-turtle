@@ -4,13 +4,17 @@ import (
 	"database/sql"
 
 	"github.com/yoshi-zen/sea-turtle/backend/models"
+	"github.com/yoshi-zen/sea-turtle/backend/myerrors"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
 const (
-	// テストするときは、ここも変更する必要がある
-	ProblemNumPerPage = 2
+	/*
+		テストするときは、ここも変更する必要がある.
+		テストケースを増やしてこのままテストできるようにしたい
+	*/
+	ProblemNumPerPage = 20
 )
 
 // 1ページ何個取得するかを決めないといけない
@@ -24,6 +28,7 @@ func SelectProblemList(db *sql.DB, page int) ([]models.Problem, error) {
 
 	rows, err := db.Query(sqlStr, ProblemNumPerPage, (page-1)*ProblemNumPerPage)
 	if err != nil {
+		err = myerrors.DBSelectFailed.Wrap(err, "failed to select problem list from DB")
 		return nil, err
 	}
 	defer rows.Close()
@@ -34,6 +39,7 @@ func SelectProblemList(db *sql.DB, page int) ([]models.Problem, error) {
 		var problem models.Problem
 		err := rows.Scan(&problem.ID, &problem.Title, &problem.ProblemStatement, &problem.Answer)
 		if err != nil {
+			err = myerrors.RowScanFailed.Wrap(err, "failed to rows.Scan DB data")
 			return nil, err
 		}
 		problemList = append(problemList, problem)
@@ -53,11 +59,13 @@ func SelectProblemDetail(db *sql.DB, ID int) (models.Problem, error) {
 
 	row := db.QueryRow(sqlStr, ID)
 	if err := row.Err(); err != nil {
+		err = myerrors.DBSelectFailed.Wrap(err, "failed to select problem detail from DB")
 		return models.Problem{}, err
 	}
 
 	err := row.Scan(&problem.ID, &problem.Title, &problem.ProblemStatement, &problem.Answer)
 	if err != nil {
+		err = myerrors.RowScanFailed.Wrap(err, "failed to row.Scan DB data")
 		return models.Problem{}, err
 	}
 
@@ -75,6 +83,7 @@ func InsertProblem(db *sql.DB, problem models.Problem) (models.Problem, error) {
 
 	result, err := db.Exec(sqlStr, problem.Title, problem.ProblemStatement, problem.Answer)
 	if err != nil {
+		err = myerrors.DBInsertFailed.Wrap(err, "failed to insert problem into DB")
 		return models.Problem{}, err
 	}
 

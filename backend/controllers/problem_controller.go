@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/yoshi-zen/sea-turtle/backend/models"
+	"github.com/yoshi-zen/sea-turtle/backend/myerrors"
 	"github.com/yoshi-zen/sea-turtle/backend/services"
 )
 
@@ -27,11 +28,12 @@ func (c *ProblemController) GetProblemListHandler(w http.ResponseWriter, req *ht
 		var err error
 		page, err = strconv.Atoi(p[0])
 		if err != nil {
-			fmt.Println(err)
+			err = myerrors.BadParameter.Wrap(err, "query parameter must be number")
+			http.Error(w, "Invalid query parameter", http.StatusBadRequest)
 			return
 		}
 	} else {
-		fmt.Println("set valid query")
+		err := myerrors.BadParameter.Wrap(nil, "query parameter must have page parameter")
 		return
 	}
 
@@ -52,6 +54,7 @@ func (c *ProblemController) GetProblemDetailHandler(w http.ResponseWriter, req *
 		var err error
 		ID, err = strconv.Atoi(id[0])
 		if err != nil {
+			err = myerrors.BadParameter.Wrap(err, "query parameter must be number")
 			fmt.Println(err)
 			return
 		}
