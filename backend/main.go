@@ -55,8 +55,6 @@ func main() {
 
 	r := routers.NewRouter(db)
 
-	fmt.Println(dbConfig)
-
 	log.Println("server start at port 8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
 }

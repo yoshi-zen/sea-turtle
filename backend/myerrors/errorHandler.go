@@ -3,6 +3,7 @@ package myerrors
 import (
 	"encoding/json"
 	"errors"
+	"log"
 	"net/http"
 )
 
@@ -29,4 +30,6 @@ func ErrorHandler(w http.ResponseWriter, req *http.Request, err error) {
 
 	w.WriteHeader(statusCode)
 	json.NewEncoder(w).Encode(myErr)
+
+	log.Println(err)
 }
