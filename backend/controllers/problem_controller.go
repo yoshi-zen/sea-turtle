@@ -28,18 +28,18 @@ func (c *ProblemController) GetProblemListHandler(w http.ResponseWriter, req *ht
 		page, err = strconv.Atoi(p[0])
 		if err != nil {
 			err = myerrors.BadParameter.Wrap(err, "query parameter must be number")
-			http.Error(w, "Invalid query parameter", http.StatusBadRequest)
+			myerrors.ErrorHandler(w, req, err)
 			return
 		}
 	} else {
 		err := myerrors.BadParameter.Wrap(NoQueryParameter, "must have page query parameter")
-		http.Error(w, "must have query parameter", http.StatusBadRequest)
+		myerrors.ErrorHandler(w, req, err)
 		return
 	}
 
 	problemList, err := services.GetProblemListService(c.db, page)
 	if err != nil {
-		http.Error(w, "failed internal exec\n", http.StatusInternalServerError)
+		myerrors.ErrorHandler(w, req, err)
 		return
 	}
 
@@ -55,14 +55,14 @@ func (c *ProblemController) GetProblemDetailHandler(w http.ResponseWriter, req *
 		ID, err = strconv.Atoi(id[0])
 		if err != nil {
 			err = myerrors.BadParameter.Wrap(err, "query parameter must be number")
-			http.Error(w, "invalid query parameter\n", http.StatusBadRequest)
+			myerrors.ErrorHandler(w, req, err)
 			return
 		}
 	}
 
 	problem, err := services.GetProblemDetailService(c.db, ID)
 	if err != nil {
-		http.Error(w, "failed internal exec\n", http.StatusInternalServerError)
+		myerrors.ErrorHandler(w, req, err)
 		return
 	}
 
@@ -73,12 +73,12 @@ func (c *ProblemController) PostProblemHandler(w http.ResponseWriter, req *http.
 	var problem models.Problem
 	if err := json.NewDecoder(req.Body).Decode(&problem); err != nil {
 		err = myerrors.ReqDecodeFailed.Wrap(err, "failed to decode json request body")
-		http.Error(w, "failed to decode json request body\n", http.StatusBadRequest)
+		myerrors.ErrorHandler(w, req, err)
 	}
 
 	newProblem, err := services.PostProblemService(c.db, problem)
 	if err != nil {
-		http.Error(w, "failed internal exec\n", http.StatusInternalServerError)
+		myerrors.ErrorHandler(w, req, err)
 		return
 	}
 

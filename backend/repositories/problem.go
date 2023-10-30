@@ -28,7 +28,7 @@ func SelectProblemList(db *sql.DB, page int) ([]models.Problem, error) {
 
 	rows, err := db.Query(sqlStr, ProblemNumPerPage, (page-1)*ProblemNumPerPage)
 	if err != nil {
-		err = myerrors.DBSelectFailed.Wrap(err, "failed to select problem list from DB")
+		err = myerrors.GetDataFailed.Wrap(err, "failed to get data")
 		return nil, err
 	}
 	defer rows.Close()
@@ -39,7 +39,7 @@ func SelectProblemList(db *sql.DB, page int) ([]models.Problem, error) {
 		var problem models.Problem
 		err := rows.Scan(&problem.ID, &problem.Title, &problem.ProblemStatement, &problem.Answer)
 		if err != nil {
-			err = myerrors.RowScanFailed.Wrap(err, "failed to rows.Scan DB data")
+			err = myerrors.GetDataFailed.Wrap(err, "failed to get data")
 			return nil, err
 		}
 		problemList = append(problemList, problem)
@@ -59,13 +59,13 @@ func SelectProblemDetail(db *sql.DB, ID int) (models.Problem, error) {
 
 	row := db.QueryRow(sqlStr, ID)
 	if err := row.Err(); err != nil {
-		err = myerrors.DBSelectFailed.Wrap(err, "failed to select problem detail from DB")
+		err = myerrors.GetDataFailed.Wrap(err, "failed to get data")
 		return models.Problem{}, err
 	}
 
 	err := row.Scan(&problem.ID, &problem.Title, &problem.ProblemStatement, &problem.Answer)
 	if err != nil {
-		err = myerrors.RowScanFailed.Wrap(err, "failed to row.Scan DB data")
+		err = myerrors.GetDataFailed.Wrap(err, "failed to get data")
 		return models.Problem{}, err
 	}
 
@@ -83,7 +83,7 @@ func InsertProblem(db *sql.DB, problem models.Problem) (models.Problem, error) {
 
 	result, err := db.Exec(sqlStr, problem.Title, problem.ProblemStatement, problem.Answer)
 	if err != nil {
-		err = myerrors.DBInsertFailed.Wrap(err, "failed to insert problem into DB")
+		err = myerrors.InsertDataFailed.Wrap(err, "failed to insert data")
 		return models.Problem{}, err
 	}
 

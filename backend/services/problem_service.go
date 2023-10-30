@@ -22,7 +22,7 @@ func GetProblemListService(db *sql.DB, page int) ([]models.Problem, error) {
 	}
 
 	if len(problemList) == 0 {
-		err := myerrors.NoData.Wrap(NoData, "get 0 problem")
+		err := myerrors.NoData.Wrap(NoData, "0 problem found")
 		return nil, err
 	}
 
