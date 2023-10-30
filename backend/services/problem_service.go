@@ -4,6 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/yoshi-zen/sea-turtle/backend/models"
+	"github.com/yoshi-zen/sea-turtle/backend/myerrors"
 	"github.com/yoshi-zen/sea-turtle/backend/repositories"
 )
 
@@ -20,6 +21,11 @@ func GetProblemListService(db *sql.DB, page int) ([]models.Problem, error) {
 		return nil, err
 	}
 
+	if len(problemList) == 0 {
+		err := myerrors.NoData.Wrap(NoData, "get 0 problem")
+		return nil, err
+	}
+
 	return problemList, nil
 }
 
@@ -29,7 +35,7 @@ func GetProblemDetailService(db *sql.DB, ID int) (models.Problem, error) {
 		return models.Problem{}, err
 	}
 
-	return problem, err
+	return problem, nil
 }
 
 func PostProblemService(db *sql.DB, problem models.Problem) (models.Problem, error) {

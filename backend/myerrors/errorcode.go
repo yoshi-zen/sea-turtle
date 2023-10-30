@@ -9,5 +9,8 @@ const (
 	DBSelectFailed ErrCode = "D001"
 
 	RowScanFailed ErrCode = "S000"
-	BadParameter  ErrCode = "S001"
+	NoData        ErrCode = "S002"
+
+	ReqDecodeFailed ErrCode = "R000"
+	BadParameter    ErrCode = "R001"
 )
