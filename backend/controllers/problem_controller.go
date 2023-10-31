@@ -3,7 +3,6 @@ package controllers
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -29,17 +28,18 @@ func (c *ProblemController) GetProblemListHandler(w http.ResponseWriter, req *ht
 		page, err = strconv.Atoi(p[0])
 		if err != nil {
 			err = myerrors.BadParameter.Wrap(err, "query parameter must be number")
-			http.Error(w, "Invalid query parameter", http.StatusBadRequest)
+			myerrors.ErrorHandler(w, req, err)
 			return
 		}
 	} else {
-		err := myerrors.BadParameter.Wrap(nil, "query parameter must have page parameter")
+		err := myerrors.BadParameter.Wrap(NoQueryParameter, "must have page query parameter")
+		myerrors.ErrorHandler(w, req, err)
 		return
 	}
 
 	problemList, err := services.GetProblemListService(c.db, page)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		myerrors.ErrorHandler(w, req, err)
 		return
 	}
 
@@ -55,14 +55,14 @@ func (c *ProblemController) GetProblemDetailHandler(w http.ResponseWriter, req *
 		ID, err = strconv.Atoi(id[0])
 		if err != nil {
 			err = myerrors.BadParameter.Wrap(err, "query parameter must be number")
-			fmt.Println(err)
+			myerrors.ErrorHandler(w, req, err)
 			return
 		}
 	}
 
 	problem, err := services.GetProblemDetailService(c.db, ID)
 	if err != nil {
-		fmt.Println(err)
+		myerrors.ErrorHandler(w, req, err)
 		return
 	}
 
@@ -71,13 +71,14 @@ func (c *ProblemController) GetProblemDetailHandler(w http.ResponseWriter, req *
 
 func (c *ProblemController) PostProblemHandler(w http.ResponseWriter, req *http.Request) {
 	var problem models.Problem
-	json.NewDecoder(req.Body).Decode(&problem)
-
-	fmt.Println(problem)
+	if err := json.NewDecoder(req.Body).Decode(&problem); err != nil {
+		err = myerrors.ReqDecodeFailed.Wrap(err, "failed to decode json request body")
+		myerrors.ErrorHandler(w, req, err)
+	}
 
 	newProblem, err := services.PostProblemService(c.db, problem)
 	if err != nil {
-		fmt.Println(err)
+		myerrors.ErrorHandler(w, req, err)
 		return
 	}
 
