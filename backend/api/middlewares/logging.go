@@ -28,6 +28,9 @@ func Logging(next http.Handler) http.Handler {
 
 		log.Printf("[%d]%s %s\n", traceID, req.RequestURI, req.Method)
 
+		ctx := SetTraceID(req.Context(), traceID)
+		req = req.WithContext(ctx)
+
 		lw := NewLoggingResWriter(w)
 
 		next.ServeHTTP(lw, req)
