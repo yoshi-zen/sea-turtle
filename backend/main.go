@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/yoshi-zen/sea-turtle/backend/routers"
+	"github.com/yoshi-zen/sea-turtle/backend/api"
 )
 
 var (
@@ -53,7 +53,7 @@ func main() {
 		return
 	}
 
-	r := routers.NewRouter(db)
+	r := api.NewRouter(db)
 
 	log.Println("server start at port 8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
