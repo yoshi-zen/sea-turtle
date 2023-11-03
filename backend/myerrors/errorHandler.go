@@ -5,6 +5,8 @@ import (
 	"errors"
 	"log"
 	"net/http"
+
+	"github.com/yoshi-zen/sea-turtle/backend/api/middlewares"
 )
 
 func ErrorHandler(w http.ResponseWriter, req *http.Request, err error) {
@@ -16,6 +18,9 @@ func ErrorHandler(w http.ResponseWriter, req *http.Request, err error) {
 			Err:     err,
 		}
 	}
+
+	traceID := middlewares.GetTraceID(req.Context())
+	log.Printf("[%d]error: %s\n", traceID, myErr)
 
 	var statusCode int
 
@@ -30,6 +35,4 @@ func ErrorHandler(w http.ResponseWriter, req *http.Request, err error) {
 
 	w.WriteHeader(statusCode)
 	json.NewEncoder(w).Encode(myErr)
-
-	log.Println(err)
 }
