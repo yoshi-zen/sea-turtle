@@ -1,6 +1,7 @@
 package services
 
 import (
+	"database/sql"
 	"net/mail"
 	"os"
 
@@ -8,27 +9,29 @@ import (
 
 	"github.com/yoshi-zen/sea-turtle/backend/controllers"
 	"github.com/yoshi-zen/sea-turtle/backend/myerrors"
+	"github.com/yoshi-zen/sea-turtle/backend/repositories"
 	"github.com/yoshi-zen/sea-turtle/backend/utils"
 )
 
-func RegisterUserService(auth *controllers.Auth) (string, error) {
-	if _, err := mail.ParseAddress(auth.email); err != nil {
+func RegisterUserService(db *sql.DB, auth *controllers.Auth) error {
+	if _, err := mail.ParseAddress(auth.Email); err != nil {
 		err = myerrors.EmailInvalid.Wrap(err, "email invalid")
-		return "", err
+		return err
 	}
 
-	hash, err := utils.PasswordEncrypt(auth.password)
+	hash, err := utils.PasswordEncrypt(auth.Password)
 	if err != nil {
 		err = myerrors.EncryptFailed.Wrap(err, "internal server error")
-		return "", err
+		return err
 	}
+	auth.Hash = hash
 
-	// レポジトリ層を呼ぶ
+	repositories.RegisterUser(db, auth)
 
 	uuidObj, err := uuid.NewUUID()
 	if err != nil {
 		err = myerrors.GenUUIDFailed.Wrap(err, "internal server error")
-		return "", err
+		return err
 	}
 
 	uuid := uuidObj.String()
@@ -45,8 +48,8 @@ func RegisterUserService(auth *controllers.Auth) (string, error) {
 	}
 	if err := myMail.SendMail(); err != nil {
 		err = myerrors.SendMailFailed.Wrap(err, "internal server error")
-		return "", err
+		return err
 	}
 
-	return uuid, nil
+	return nil
 }

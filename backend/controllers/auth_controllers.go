@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"database/sql"
 	"encoding/json"
 	"net/http"
 
@@ -9,10 +10,12 @@ import (
 	"github.com/yoshi-zen/sea-turtle/backend/services"
 )
 
-type AuthController struct{}
+type AuthController struct {
+	db *sql.DB
+}
 
-func NewAuthController() *AuthController {
-	return &AuthController{}
+func NewAuthController(db *sql.DB) *AuthController {
+	return &AuthController{db: db}
 }
 
 func (c *AuthController) RegisterUserHandler(w http.ResponseWriter, req *http.Request) {
@@ -22,7 +25,7 @@ func (c *AuthController) RegisterUserHandler(w http.ResponseWriter, req *http.Re
 		myerrors.ErrorHandler(w, req, err)
 	}
 
-	if err := services.RegisterUserService(auth); err != nil {
+	if err := services.RegisterUserService(c.db, auth); err != nil {
 
 	}
 }
