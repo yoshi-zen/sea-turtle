@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"net/smtp"
 )
 
@@ -22,4 +23,12 @@ func (m *Mail) SendMail() error {
 	}
 
 	return nil
+}
+
+func MailMessage(uuid string) string {
+	message := fmt.Sprintf(`以下のリンクをクリックしてメールアドレスを認証してください。
+	http://localhost:8080/auth/mail?uuid=%s
+	ひとりでウミガメのスープへのアカウント登録に身に覚えがない場合は無視してください。`, uuid)
+
+	return message
 }
