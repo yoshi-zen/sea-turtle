@@ -26,7 +26,7 @@ func (c *AuthController) RegisterUserHandler(w http.ResponseWriter, req *http.Re
 	}
 
 	if err := services.RegisterUserService(c.db, auth); err != nil {
-
+		myerrors.ErrorHandler(w, req, err)
 	}
 }
 

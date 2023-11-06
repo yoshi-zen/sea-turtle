@@ -26,7 +26,9 @@ func RegisterUserService(db *sql.DB, auth *controllers.Auth) error {
 	}
 	auth.Hash = hash
 
-	repositories.RegisterUser(db, auth)
+	if err = repositories.RegisterUser(db, auth); err != nil {
+		return err
+	}
 
 	uuidObj, err := uuid.NewUUID()
 	if err != nil {
@@ -34,16 +36,17 @@ func RegisterUserService(db *sql.DB, auth *controllers.Auth) error {
 		return err
 	}
 
-	uuid := uuidObj.String()
+	mailAuthUuid := uuidObj.String()
 
 	/*
 		ToDo: メール本文考える、認証するAPIリクエストを送るリンクの送信
 	*/
+	mailMessage := utils.MailMessage(mailAuthUuid)
 	myMail := utils.Mail{
 		from:     os.Getenv("EMAIL_ADDRESS"),
 		password: os.Getenv("EMAIL_PASSWORD"),
 		to:       auth.email,
-		subject:  mailSubject,
+		subject:  "メールアドレスの認証",
 		message:  mailMessage,
 	}
 	if err := myMail.SendMail(); err != nil {
