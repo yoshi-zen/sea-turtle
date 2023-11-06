@@ -8,8 +8,12 @@ const (
 	InsertDataFailed ErrCode = "D000"
 	GetDataFailed    ErrCode = "D001"
 
-	NoData ErrCode = "S000"
+	NoData         ErrCode = "S000"
+	EncryptFailed  ErrCode = "S001"
+	GenUUIDFailed  ErrCode = "S002"
+	SendMailFailed ErrCode = "S003"
 
 	ReqDecodeFailed ErrCode = "R000"
 	BadParameter    ErrCode = "R001"
+	EmailInvalid    ErrCode = "R002"
 )
