@@ -20,4 +20,5 @@ type User struct {
 type Auth struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
+	Hash     string
 }
