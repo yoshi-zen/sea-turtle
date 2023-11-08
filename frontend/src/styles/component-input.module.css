@@ -1,0 +1,20 @@
+.input_label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.8em 1em;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-family: inherit;
+  transition: 0.3s;
+  outline: none;
+  width: 100%;
+}
