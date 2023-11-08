@@ -14,7 +14,7 @@ export default function Home() {
           <p>「はい」か「いいえ」の質問をして、答を導け！</p>
         </div>
         <div className={styles.heroImg_wrapper}>
-          <Image src={turtleImg} alt='turtle' layout='responsive' priority />
+          <Image src={turtleImg} alt='turtle' layout='responsive' style={{ display: 'block' }} priority />
         </div>
       </div>
       <div className={styles.downText_wrapper}>
