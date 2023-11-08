@@ -9,11 +9,11 @@ import (
 
 func RegisterUser(db *sql.DB, auth *models.Auth) error {
 	const sqlStr = `
-	insert into users (email, password_hash, activate_flag, created_at) values 
-	(?, ?, false, now());
+	insert into users (email, password_hash, uuid, activate_flag, created_at) values 
+	(?, ?, ?, false, now());
 	`
 
-	if _, err := db.Exec(sqlStr, auth.Email, auth.Hash); err != nil {
+	if _, err := db.Exec(sqlStr, auth.Email, auth.Hash, auth.Uuid); err != nil {
 		err = myerrors.InsertDataFailed.Wrap(err, "internal server error")
 		return err
 	}
