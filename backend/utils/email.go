@@ -6,19 +6,20 @@ import (
 )
 
 type Mail struct {
-	from     string
-	password string
-	to       []string
-	subject  string
-	message  string
+	Host     string
+	Port     string
+	From     string
+	Password string
+	To       []string
+	Subject  string
+	Message  string
 }
 
 func (m *Mail) SendMail() error {
-	smtpHost := "smtp.example.com"
-	smtpPort := "587"
-	auth := smtp.PlainAuth("", m.from, m.password, smtpHost)
+	auth := smtp.PlainAuth("", m.From, m.Password, m.Host)
+	msg := []byte(fmt.Sprintf("To: %s\r\n"+"Subject: %s\r\n"+"\r\n"+"%s\r\n", m.To[0], m.Subject, m.Message))
 
-	if err := smtp.SendMail(smtpHost+":"+smtpPort, auth, m.from, m.to, []byte(m.subject+m.message)); err != nil {
+	if err := smtp.SendMail(m.Host+":"+m.Port, auth, m.From, m.To, msg); err != nil {
 		return err
 	}
 
@@ -26,9 +27,7 @@ func (m *Mail) SendMail() error {
 }
 
 func MailMessage(uuid string) string {
-	message := fmt.Sprintf(`以下のリンクをクリックしてメールアドレスを認証してください。
-	http://localhost:8080/auth/mail?uuid=%s
-	ひとりでウミガメのスープへのアカウント登録に身に覚えがない場合は無視してください。`, uuid)
+	message := fmt.Sprintf("以下のリンクをクリックしてメールアドレスを認証してください。\nhttp://localhost:8080/auth/mail?uuid=%s\nひとりでウミガメのスープへのアカウント登録に身に覚えがない場合は無視してください。", uuid)
 
 	return message
 }

@@ -7,13 +7,13 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/yoshi-zen/sea-turtle/backend/controllers"
+	"github.com/yoshi-zen/sea-turtle/backend/models"
 	"github.com/yoshi-zen/sea-turtle/backend/myerrors"
 	"github.com/yoshi-zen/sea-turtle/backend/repositories"
 	"github.com/yoshi-zen/sea-turtle/backend/utils"
 )
 
-func RegisterUserService(db *sql.DB, auth *controllers.Auth) error {
+func RegisterUserService(db *sql.DB, auth *models.Auth) error {
 	if _, err := mail.ParseAddress(auth.Email); err != nil {
 		err = myerrors.EmailInvalid.Wrap(err, "email invalid")
 		return err
@@ -38,16 +38,15 @@ func RegisterUserService(db *sql.DB, auth *controllers.Auth) error {
 
 	mailAuthUuid := uuidObj.String()
 
-	/*
-		ToDo: メール本文考える、認証するAPIリクエストを送るリンクの送信
-	*/
 	mailMessage := utils.MailMessage(mailAuthUuid)
 	myMail := utils.Mail{
-		from:     os.Getenv("EMAIL_ADDRESS"),
-		password: os.Getenv("EMAIL_PASSWORD"),
-		to:       auth.email,
-		subject:  "メールアドレスの認証",
-		message:  mailMessage,
+		Host:     "smtp.gmail.com",
+		Port:     "587",
+		From:     os.Getenv("EMAIL_ADDRESS"),
+		Password: os.Getenv("EMAIL_PASSWORD"),
+		To:       []string{auth.Email},
+		Subject:  "メールアドレスの認証",
+		Message:  mailMessage,
 	}
 	if err := myMail.SendMail(); err != nil {
 		err = myerrors.SendMailFailed.Wrap(err, "internal server error")
