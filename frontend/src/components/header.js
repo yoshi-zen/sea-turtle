@@ -17,7 +17,7 @@ export default function Header() {
           <ul className={styles.header_menu}>
             <li onClick={() => router.push('/')}>ホーム</li>
             <li onClick={() => router.push('/questions')}>問題一覧</li>
-            <li onClick={() => router.push('/')}>log in</li>
+            <li onClick={() => router.push('/auth')}>log in</li>
           </ul>
         </div>
       </Container>
