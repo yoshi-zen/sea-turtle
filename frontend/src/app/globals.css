@@ -83,6 +83,8 @@
 
   --color-brown: #ffe6cd;
 
+  --color-orange: #ffbc04;
+
   /* 文字サイズ的なとりきめ */
   --char-size-hero: clamp(1.5rem, 0.773rem + 3.64vw, 3.5rem); /* 40-60px */
   --char-size-h1: clamp(1.2rem, 0.727rem + 2.36vw, 2.5rem); /* 25-35px */
