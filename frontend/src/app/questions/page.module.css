@@ -78,17 +78,6 @@
   display: none;
 }
 
-.contributer_wrapper {
-  background-color: white;
-  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.35);
-  border-radius: 5px;
-  padding: 1em;
-}
-
-.contributer_wrapper > * + * {
-  margin-top: 0.5em;
-}
-
 .contributer_name_pic_inner {
   display: flex;
   flex-direction: row;

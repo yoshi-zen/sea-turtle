@@ -2,6 +2,7 @@
 
 import styles from '@/app/questions/page.module.css';
 import Layout12 from '@/components/layout-12columns';
+import WrapperShadowBox from '@/components/wrapper-shadow-box';
 
 import { useEffect, useState } from 'react';
 
@@ -87,7 +88,7 @@ export default function Questions() {
         </div>
       </div>
       <div className={styles.right_container}>
-        <div className={styles.contributer_wrapper}>
+        <WrapperShadowBox>
           <p>Contributer</p>
           <div className={styles.contributer_name_pic_inner}>
             <div style={{ width: '50px', height: '50px', borderRadius: '25px', backgroundColor: 'gray' }}></div>
@@ -96,7 +97,7 @@ export default function Questions() {
               <button>Follow</button>
             </div>
           </div>
-        </div>
+        </WrapperShadowBox>
         {/* <div className={styles.new_question_wrapper}>
           <h2>新着問題</h2>
           <p>ゴンとチロ</p>
