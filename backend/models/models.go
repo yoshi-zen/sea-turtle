@@ -16,3 +16,9 @@ type User struct {
 	SolvedList []int     `json:"solved_list"`
 	CreatedAt  time.Time `json:"created_at"`
 }
+
+type Auth struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+	Hash     string
+}
