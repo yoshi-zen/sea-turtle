@@ -54,3 +54,12 @@ func RegisterUserService(db *sql.DB, auth *models.Auth) error {
 
 	return nil
 }
+
+func MailCheckService(db *sql.DB, uuid string) error {
+	err := repositories.UpdateActivate(db, uuid)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

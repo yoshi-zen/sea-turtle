@@ -20,3 +20,28 @@ func RegisterUser(db *sql.DB, auth *models.Auth) error {
 
 	return nil
 }
+
+func UpdateActivate(db *sql.DB, uuid string) error {
+	const sqlStr = `
+	update users
+	set activate_flag = true
+	where uuid = ?;
+	`
+
+	result, err := db.Exec(sqlStr, uuid)
+	if err != nil {
+		err = myerrors.UpdateDataFailed.Wrap(err, "internal server error")
+		return err
+	}
+	num, err := result.RowsAffected()
+	if err != nil {
+		err = myerrors.Unknown.Wrap(err, "internal server error")
+		return err
+	}
+	if num == 0 {
+		err = myerrors.NoData.Wrap(NotFound, "not found")
+		return err
+	}
+
+	return nil
+}

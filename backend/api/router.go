@@ -20,7 +20,7 @@ func NewRouter(db *sql.DB) *mux.Router {
 	r.HandleFunc("/problem/add", pc.PostProblemHandler).Methods(http.MethodPost)
 	r.HandleFunc("/auth/register", ac.RegisterUserHandler).Methods(http.MethodPost)
 	// r.HandleFunc("/auth/login")
-	// r.HandleFunc("/auth/mail")
+	r.HandleFunc("/auth/mail", ac.MailCheckHandler).Methods(http.MethodGet)
 	// r.HandleFunc("/auth/cookie")
 
 	r.Use(middlewares.Logging)
