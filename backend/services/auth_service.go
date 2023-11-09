@@ -26,18 +26,13 @@ func RegisterUserService(db *sql.DB, auth *models.Auth) error {
 	}
 	auth.Hash = hash
 
-	if err = repositories.RegisterUser(db, auth); err != nil {
-		return err
-	}
-
 	uuidObj, err := uuid.NewUUID()
 	if err != nil {
 		err = myerrors.GenUUIDFailed.Wrap(err, "internal server error")
 		return err
 	}
-
 	mailAuthUuid := uuidObj.String()
-
+	auth.Uuid = mailAuthUuid
 	mailMessage := utils.MailMessage(mailAuthUuid)
 	myMail := utils.Mail{
 		Host:     "smtp.gmail.com",
@@ -50,6 +45,19 @@ func RegisterUserService(db *sql.DB, auth *models.Auth) error {
 	}
 	if err := myMail.SendMail(); err != nil {
 		err = myerrors.SendMailFailed.Wrap(err, "internal server error")
+		return err
+	}
+
+	if err = repositories.RegisterUser(db, auth); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func MailCheckService(db *sql.DB, uuid string) error {
+	err := repositories.UpdateActivate(db, uuid)
+	if err != nil {
 		return err
 	}
 
